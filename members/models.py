@@ -12,4 +12,4 @@ class Member(models.Model):
     stauts = models.CharField(max_length=2)
 
     def __str__(self):
-        return self.members_name
+        return self.member_name

@@ -1,0 +1,93 @@
+{% extends "manager/base.html" %}
+
+{% block body %}
+<div class="row">
+  <div class="col-12">
+    <div class="card bg-light ms-4 me-4 mb-4">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">GYM</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Manager</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Members</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Staffs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Products</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            Help
+          </span>
+        </div>
+      </nav>
+      <div class="card-header">
+        <i class="fa-solid fa-list fa-lg"></i> Manager Records List | All Manager | Add Manager
+      </div>
+      {% if managers %}
+      <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Designation</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">DOB</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Status</th>
+                  </tr>
+              </thead>
+                <tbody>
+                  {% for manager in managers %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td><a href="{% url 'manager_detail' manager.id %}">{{ manager.first_name }} {{ manager.last_name }}</a></td>
+                      <td>{{ manager.address }}</td>
+                      <td>{{ manager.phone_number }}</td>
+                      <td>{{ manager.designation }}</td>
+                      <td>{{ manager.email }}</td>
+                      <td>{{ manager.date_of_birth }}</td>
+                      <td>{{ manager.gender }}</td>
+                      <td>{{ manager.status }}</td>
+                      
+                      <td>
+                        <button type="button" class="btn btn-success me-1" href="" data-bs-toggle="modal" data-bs-target="">
+                          <i class="fa-solid fa-circle-info fa-lg"></i> Show
+                        </button>
+
+                        <a class="btn btn-warning me-1" href="">
+                          <i class="fa-solid fa-pen-to-square fa-lg"></i>Edit
+                        </a>
+  
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="">
+                          <i class="fa-solid fa-trash-can fa-lg"></i>Delete
+                        </button>
+                      </td>
+                    </tr>
+                        {% endfor %}
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+    {% else %}
+    <h5 class="alert alert-primary ms-4 me-4">No Manager Records in the system.</h5>
+  {% endif %}
+  </div>
+</div>
+{% endblock %}
